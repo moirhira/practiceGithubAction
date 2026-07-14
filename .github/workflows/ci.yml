@@ -1,20 +1,19 @@
-name: Hello Github Action
+name: Multiple Jobs
 
 on: push
 
 jobs:
-    first_job:
-        runs-on: ubuntu-latest
-        steps:
-            - name: print hello
-              run : echo Hello Github Actions
+  Information:
+    steps:
+      - name: Information
+        run : echo "information"
 
-            - name: print date
-              run : echo "Current date is $(date + '%Y-%m-%d')"
+  Lint:
+    steps:
+      - name: Lint
+        run : echo "lint"
 
-            - name: print the repo and the branch name
-              run : |
-                    echo "Repository Name is: ${{ github.event.repository.name }}"
-                    echo "Branch Name is: ${GITHUB_REF#refs/heads/}"
-
-
+  Build: 
+    steps:
+      - name: Build
+        run : echo "build"

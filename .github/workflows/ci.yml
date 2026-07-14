@@ -4,16 +4,19 @@ on: push
 
 jobs:
   Information:
+    runs-on: ubuntu-latest
     steps:
       - name: Information
         run : echo "information"
 
   Lint:
+    runs-on: ubuntu-latest
     steps:
       - name: Lint
         run : echo "lint"
 
-  Build: 
+  Build:
+    runs-on: ubuntu-latest
     steps:
       - name: Build
         run : echo "build"

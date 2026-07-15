@@ -6,13 +6,30 @@ jobs:
   first-job:
     strategy:
       matrix:
-        os: [ubuntu-latest, mac-os, windows-latest]
-    runs-on: ${matrix.os}
+        os: 
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        py:
+          - 3.10
+          - 3.11
+          - 3.12
+
+        exclude:
+          - os: macos-latest
+          - py: 3.12
+    
+    runs-on: ${{ matrix.os }}
     steps:
       - name: print OS name
         run : echo "$RUNNER_OS"
       
-      - name: print python version
-        run : python3 --version
+      - name: setup python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.py }}
 
-      
+      - name: print python version
+        run : python --version
+
+    

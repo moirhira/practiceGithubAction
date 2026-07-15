@@ -1,0 +1,31 @@
+name: Artifact
+
+on: push
+
+jobs:
+  job-1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create the file
+        run : echo "Current date:" > file.txt
+      
+      - name: save the current date
+        run : echo $('%Y-%m-%d') >> file.txt
+
+      - name: upload the artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: artifact
+          path: file.txt
+
+  job-2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: dowmload the artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: artifac
+          path: file.txt
+      
+      - name: read the artifact content
+        run : cat file.txt

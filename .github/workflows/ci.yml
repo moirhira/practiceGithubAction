@@ -1,0 +1,35 @@
+name: Weather CLI CI
+
+on: push
+
+jobs:
+    job-1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout the code
+              uses : actions/checkout@v5
+
+            - name: setup python
+              uses : actions/setup-python@v4
+              with:
+                python-version: '3.11'
+
+            - name: install dependencies
+              run : pip install -r weather-cli/requirements.txt
+    
+            - name: run formater
+              run : black --check .
+
+            - name: run linter
+              run : flake8 .
+
+            - name: run tests with coverage
+              run : pytest --cov=weather-cli --cov-report=xml --cov-report=term-missing
+
+            - name: upload coverage report
+              uses: actions/upload-artifact@v4
+              with:
+                name: coverage-report
+                path: coverage.xml
+            
+        

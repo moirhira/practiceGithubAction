@@ -1,0 +1,1 @@
+# Weather CLI\nCopy .env.example to .env and add your OpenWeatherMap API key.\nRun: `pip install -r requirements.txt` then `python main.py`.

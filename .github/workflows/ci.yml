@@ -1,0 +1,37 @@
+name: Docker CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Build Docker image
+        run: |
+          docker build -t weather-cli .
+
+      - name: List Docker images
+        run: docker images
+
+      - name: Run Docker container
+        run: |
+          docker run --name weather-container weather-cli
+
+      - name: Verify output
+        run: |
+          output=$(docker logs weather-container)
+          echo "$output"
+
+          if [[ "$output" == *"Hello from Docker!"* ]]; then
+            echo "✅ Output verified"
+          else
+            echo "❌ Wrong output"
+            exit 1
+          fi

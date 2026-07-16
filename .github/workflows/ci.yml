@@ -1,0 +1,8 @@
+name: Secrets & Environment Variables
+
+on: workflow_dispatch
+
+jobs:
+  job-1:
+    runs-on: unbuntu-latest
+      

@@ -1,6 +1,6 @@
 name: Secrets & Environment Variables
 
-on: workflow_dispatch
+on: push
 
 jobs:
   job-1:

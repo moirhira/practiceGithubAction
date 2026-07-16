@@ -1,0 +1,21 @@
+name: Cache Dependencies
+
+on: push
+
+jobs:
+  install-python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v5
+
+      - name: setup python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+        
+      - name: install dependencies
+        run : pip install -r requirements.txt
+
+  

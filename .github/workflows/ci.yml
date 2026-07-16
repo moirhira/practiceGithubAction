@@ -5,4 +5,9 @@ on: workflow_dispatch
 jobs:
   job-1:
     runs-on: unbuntu-latest
-      
+    steps:
+      - name: print the var
+        run : echo ${{vars.VAR}}
+
+      - name: print the secret
+        run : echo ${{secrets.SEC}}

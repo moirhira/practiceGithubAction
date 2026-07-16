@@ -2,12 +2,19 @@ name: Secrets & Environment Variables
 
 on: push
 
+env:
+  API_KEY: ${{ secrets.SEC }}
 jobs:
   job-1:
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: print the var
         run : echo ${{vars.VAR}}
 
       - name: print the secret
-        run : echo ${{secrets.SEC}}
+        run : |
+              if [ -z "$API_KEY" ]; then
+                echo "Secret is missing"
+                exit 1
+              fi
+              echo "Secret is available."

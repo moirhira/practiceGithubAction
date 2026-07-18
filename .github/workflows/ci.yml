@@ -10,7 +10,7 @@ jobs:
               run : echo "checkouting..."
 
             - name: Build
-              run : echo "building..."
+              uses: ./build.yaml
 
             - name: Test
               run : echo "Testing..."

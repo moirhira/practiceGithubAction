@@ -1,0 +1,22 @@
+name: Test Workflow
+
+on:
+  workflow_call:
+    inputs:
+      build-result:
+        description: Build output passed from CI
+        required: true
+        type: string
+    outputs:
+      test_result:
+        description: Result from the test workflow
+        value: ${{ jobs.test.outputs.test_result }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    outputs:
+      test_result: ${{ steps.test.outputs.test_result }}
+    steps:
+      - id: test
+        run: echo "test_result=Tested '${{ inputs.build-result }}'" >> "$GITHUB_OUTPUT"

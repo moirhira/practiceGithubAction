@@ -1,0 +1,23 @@
+name: Build Workflow
+
+on:
+  workflow_call:
+    inputs:
+      target:
+        description: Target to build
+        required: false
+        type: string
+        default: application
+    outputs:
+      build_result:
+        description: Result from the build workflow
+        value: ${{ jobs.build.outputs.build_result }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      build_result: ${{ steps.build.outputs.build_result }}
+    steps:
+      - id: build
+        run: echo "build_result=Built ${{ inputs.target }}" >> "$GITHUB_OUTPUT"

@@ -13,6 +13,6 @@ jobs:
               uses: ./build.yaml
 
             - name: Test
-              run : echo "Testing..."
+              uses: ./test.yaml
 
     

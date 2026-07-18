@@ -1,9 +1,6 @@
 name: Docker CI
 
-on:
-  push:
-    branches:
-      - feature/ex08
+on: push
 
 jobs:
   docker:

@@ -30,7 +30,7 @@ jobs:
           echo "$output"
 
           if [[ "$output" == *"Hello from Docker!"* ]]; then
-            echo "✅ Output verified"
+            echo "✅ Output veerified"
           else
             echo "❌ Wrong output"
             exit 1

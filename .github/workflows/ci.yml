@@ -18,10 +18,24 @@ jobs:
                     - ubuntu-latest
                     - windows-latest
                     - macos-latest
-                python: 
+                python-vr: 
                     - "3.10"
                     - "3.11"
                     - "3.12"
             
         runs-on: ${{matrix.os}}
         
+        steps:
+            - name: Checkout the code
+              uses: actions/checkout@v5
+            
+            - name: setup Python
+              uses: actions/setup-python@v6
+              with:
+                python-version: ${{ matrix.python-vr }}
+                cache: pip
+
+            - name: Install dependencies
+              run: |
+                    python -m pip install --upgrade pip
+                    pip install -r requirements.txt

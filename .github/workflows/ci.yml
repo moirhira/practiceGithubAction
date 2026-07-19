@@ -1,38 +1,27 @@
-name: Weather CLI CI
+name: Production-Level CI/CD
 
 on: push
 
+permissions:
+    contents: read
+
+concurrency:
+    group: ci-${{ github.ref }}
+    cancel-in-progress: true
+
 jobs:
-    job-1:
-        runs-on: ubuntu-latest
-        defaults:
-            run:
-                working-directory: weather-cli
-        steps:
-            - name: Checkout the code
-              uses: actions/checkout@v5
-
-            - name: setup python
-              uses : actions/setup-python@v4
-              with:
-                python-version: '3.11'
-
-            - name: install dependencies
-              run: pip install -r requirements.txt
-    
-            - name: run formater
-              run: black --check .
-
-            - name: run linter
-              run: flake8 .
-
-            - name: run tests with coverage
-              run: python -m pytest --cov=weather --cov-report=xml --cov-report=term-missing
-
-            - name: upload coverage report
-              uses: actions/upload-artifact@v4
-              with:
-                name: coverage-report
-                path: coverage.xml
+    build:
+        strategy:
+            fail-fast: false
+            matrix:
+                os: 
+                    - ubuntu-latest
+                    - windows-latest
+                    - macos-latest
+                python: 
+                    - "3.10"
+                    - "3.11"
+                    - "3.12"
             
+        runs-on: ${{matrix.os}}
         
